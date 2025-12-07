@@ -3,7 +3,9 @@ import Link from "next/link";
 
 import { Button, buttonVariants } from "@/components/ui/button";
 
+import { auth } from "@/app/utils/auth";
 import { ThemeToggle } from "@/components/general/ThemeToggle";
+import { UserDropdown } from "@/components/general/UserDropdown";
 import {
   Sheet,
   SheetContent,
@@ -16,6 +18,8 @@ import Logo from "@/public/logo.png";
 import { Menu } from "lucide-react";
 
 export async function Navbar() {
+  const session = await auth();
+
   return (
     <nav className="flex justify-between items-center py-5">
       <Link href="/" className="flex items-center gap-2">
@@ -32,13 +36,12 @@ export async function Navbar() {
           Post Job
         </Link>
 
-        {true ? (
-          //   <UserDropdown
-          //     email={session.user.email as string}
-          //     name={session.user.name as string}
-          //     image={session.user.image as string}
-          //   />
-          <></>
+        {session?.user ? (
+          <UserDropdown
+            email={session.user.email as string}
+            name={session.user.name as string}
+            image={session.user.image as string}
+          />
         ) : (
           <Link
             href="/login"
@@ -52,13 +55,12 @@ export async function Navbar() {
       {/* Mobile Navigation */}
       <div className="md:hidden flex items-center gap-4">
         <ThemeToggle />
-        {false ? (
-          //   <UserDropdown
-          //     email={session.user.email as string}
-          //     name={session.user.name as string}
-          //     image={session.user.image as string}
-          //   />
-          <></>
+        {session?.user ? (
+          <UserDropdown
+            email={session.user.email as string}
+            name={session.user.name as string}
+            image={session.user.image as string}
+          />
         ) : (
           <Sheet>
             <SheetTrigger asChild>
