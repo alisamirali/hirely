@@ -69,7 +69,7 @@ export function LoginForm() {
               action={async () => {
                 "use server";
                 await signIn("github", {
-                  redirectTo: "/",
+                  redirectTo: "/onboarding",
                 });
               }}
             >
@@ -84,7 +84,7 @@ export function LoginForm() {
               action={async () => {
                 "use server";
                 await signIn("google", {
-                  redirectTo: "/",
+                  redirectTo: "/onboarding",
                 });
               }}
             >

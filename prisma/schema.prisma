@@ -94,18 +94,17 @@ enum UserType {
 model Company {
     id String @id @default(uuid())
 
-    name     String
-    location String
-    logo     String
-    website  String
-    xAccount String?
-    about    String
-    user     User    @relation(fields: [userId], references: [id])
-    userId   String  @unique
-
-    createdAt DateTime  @default(now())
-    updatedAt DateTime  @updatedAt
-    JobPost   JobPost[]
+    name            String
+    location        String
+    logo            String
+    website         String
+    linkedInAccount String?
+    about           String
+    user            User      @relation(fields: [userId], references: [id])
+    userId          String    @unique
+    createdAt       DateTime  @default(now())
+    updatedAt       DateTime  @updatedAt
+    JobPost         JobPost[]
 }
 
 model JobSeeker {
