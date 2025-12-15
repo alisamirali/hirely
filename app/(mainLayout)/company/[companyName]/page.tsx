@@ -209,7 +209,21 @@ const CompanyProfilePage = async ({ params }: { params: Params }) => {
 
           {activeJobs.length > 0 ? (
             <div className="flex flex-col gap-6">
-              {activeJobs.map((job) => (
+              {activeJobs.map((job: {
+                id: string;
+                jobTitle: string;
+                salaryFrom: number;
+                salaryTo: number;
+                employmentType: string;
+                location: string;
+                createdAt: Date;
+                company: {
+                  name: string;
+                  logo: string | null;
+                  location: string;
+                  about: string;
+                };
+              }) => (
                 <JobCard job={job} key={job.id} />
               ))}
             </div>
