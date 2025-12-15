@@ -1,11 +1,5 @@
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -22,7 +16,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { MoreHorizontal, PenBoxIcon, User2, XCircle } from "lucide-react";
+import { MoreHorizontal, PenBoxIcon, Trash2, User2 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -63,7 +57,9 @@ export default async function MyJobs() {
   const data = await getJobs(session.id as string);
 
   return (
-    <>
+    <div className="space-y-4 mt-8">
+      <h1 className="text-2xl font-semibold">My Jobs</h1>
+
       {data.length === 0 ? (
         <EmptyState
           title="No job posts found"
@@ -73,13 +69,7 @@ export default async function MyJobs() {
         />
       ) : (
         <Card>
-          <CardHeader>
-            <CardTitle>My Jobs</CardTitle>
-            <CardDescription>
-              Manage your job listings and applications here.
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
+          <CardContent className="p-4">
             <Table>
               <TableHeader>
                 <TableRow>
@@ -87,8 +77,6 @@ export default async function MyJobs() {
                   <TableHead>Company</TableHead>
                   <TableHead>Job Title</TableHead>
                   <TableHead>Status</TableHead>
-                  {/* TODO: Add applicants table head */}
-                  {/* <TableHead>Applicants</TableHead> */}
                   <TableHead>Created On</TableHead>
                   <TableHead className="text-right">Actions</TableHead>
                 </TableRow>
@@ -119,8 +107,6 @@ export default async function MyJobs() {
                       {listing.status.charAt(0).toUpperCase() +
                         listing.status.slice(1).toLowerCase()}
                     </TableCell>
-                    {/* TODO: Add applicants table cell */}
-                    {/* <TableCell>5</TableCell> */}
                     <TableCell>
                       {listing.createdAt.toLocaleDateString("en-US", {
                         month: "long",
@@ -149,10 +135,10 @@ export default async function MyJobs() {
                           <DropdownMenuSeparator />
                           <DropdownMenuItem
                             asChild
-                            className="cursor-pointer text-destructive"
+                            className="cursor-pointer text-red-800"
                           >
                             <Link href={`/my-jobs/${listing.id}/delete`}>
-                              <XCircle className="size-4" />
+                              <Trash2 className="size-4" />
                               Delete Job
                             </Link>
                           </DropdownMenuItem>
@@ -166,6 +152,6 @@ export default async function MyJobs() {
           </CardContent>
         </Card>
       )}
-    </>
+    </div>
   );
 }
