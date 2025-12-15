@@ -24,7 +24,7 @@ export const ourFileRouter = {
       // Whatever is returned here is accessible in onUploadComplete as `metadata`
       return { userId: session.user.id };
     })
-    .onUploadComplete(async ({ metadata, file }) => {
+    .onUploadComplete(async ({ metadata }) => {
       // !!! Whatever is returned here is sent to the client side `onClientUploadComplete` callback
       return { uploadedBy: metadata.userId };
     }),
@@ -46,7 +46,7 @@ export const ourFileRouter = {
       // Whatever is returned here is accessible in onUploadComplete as `metadata`
       return { userId: session.user.id };
     })
-    .onUploadComplete(async ({ metadata, file }) => {
+    .onUploadComplete(async ({ metadata }) => {
       // !!! Whatever is returned here is sent to the client side `onClientUploadComplete` callback
       return { uploadedBy: metadata.userId };
     }),
