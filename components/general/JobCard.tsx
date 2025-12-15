@@ -8,7 +8,7 @@ import Link from "next/link";
 import { Badge } from "../ui/badge";
 import { Card, CardFooter, CardHeader } from "../ui/card";
 
-interface iAppProps {
+type JobCardProps = {
   job: {
     id: string;
     jobTitle: string;
@@ -24,9 +24,9 @@ interface iAppProps {
       location: string;
     };
   };
-}
+};
 
-export function JobCard({ job }: iAppProps) {
+export function JobCard({ job }: JobCardProps) {
   return (
     <Link href={`/job/${job.id}`}>
       <Card className="hover:shadow-lg transition-all duration-300 hover:border-primary relative">

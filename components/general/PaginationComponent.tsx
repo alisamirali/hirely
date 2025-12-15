@@ -11,10 +11,10 @@ import {
 } from "@/components/ui/pagination";
 import { useRouter, useSearchParams } from "next/navigation";
 
-interface PaginationComponentProps {
+type PaginationComponentProps = {
   totalPages: number;
   currentPage: number;
-}
+};
 
 export function PaginationComponent({
   totalPages,

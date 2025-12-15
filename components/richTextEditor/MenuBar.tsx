@@ -28,9 +28,9 @@ import {
   Undo,
 } from "lucide-react";
 
-interface MenuBarProps {
+type MenuBarProps = {
   editor: Editor | null;
-}
+};
 
 export function MenuBar({ editor }: MenuBarProps) {
   if (!editor) {
