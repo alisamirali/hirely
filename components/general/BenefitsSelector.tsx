@@ -21,7 +21,7 @@ export function BenefitsSelector({ field }: BenefitsSelectorProps) {
   return (
     <div>
       <div className="flex flex-wrap gap-3">
-        {benefits.map((benefit) => {
+        {benefits.map((benefit: { id: string; label: string; icon: React.ReactNode }) => {
           const isSelected = (field.value || []).includes(benefit.id);
           return (
             <Badge

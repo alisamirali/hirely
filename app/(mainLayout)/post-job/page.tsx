@@ -38,7 +38,7 @@ export default async function PostJobPage() {
           <CardContent className="space-y-6">
             {/* Company Logos */}
             <div className="grid grid-cols-3 gap-4">
-              {companies.map((company) => (
+              {companies.map((company: { id: number; name: string; logo: unknown }) => (
                 <div
                   key={company.id}
                   className="flex items-center justify-center"
@@ -56,7 +56,7 @@ export default async function PostJobPage() {
 
             {/* Testimonials */}
             <div className="space-y-4">
-              {testimonials.map((testimonial, index) => (
+              {testimonials.map((testimonial: { quote: string; author: string; company: string }, index) => (
                 <blockquote
                   key={index}
                   className="border-l-2 border-primary pl-4"
@@ -73,7 +73,7 @@ export default async function PostJobPage() {
 
             {/* Stats */}
             <div className="grid grid-cols-2 gap-4">
-              {stats.map((stat, index) => (
+              {stats.map((stat: { value: string; label: string }, index) => (
                 <div key={index} className="rounded-lg bg-muted p-4">
                   <div className="text-2xl font-bold">{stat.value}</div>
                   <div className="text-sm text-muted-foreground">

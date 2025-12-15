@@ -82,7 +82,16 @@ export default async function MyJobs() {
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {data.map((listing) => (
+                {data.map((listing: {
+                  id: string;
+                  jobTitle: string;
+                  status: string;
+                  createdAt: Date;
+                  company: {
+                    name: string;
+                    logo: string | null;
+                  };
+                }) => (
                   <TableRow key={listing.id}>
                     <TableCell>
                       {listing.company.logo ? (

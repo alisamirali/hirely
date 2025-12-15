@@ -80,7 +80,21 @@ export async function JobListings({
     <>
       {jobs.length > 0 ? (
         <div className="flex flex-col gap-6">
-          {jobs.map((job, index) => (
+          {jobs.map((job: {
+            id: string;
+            jobTitle: string;
+            salaryFrom: number;
+            salaryTo: number;
+            employmentType: string;
+            location: string;
+            createdAt: Date;
+            company: {
+              name: string;
+              logo: string | null;
+              location: string;
+              about: string;
+            };
+          }, index) => (
             <JobCard job={job} key={index} />
           ))}
         </div>

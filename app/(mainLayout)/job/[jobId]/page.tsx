@@ -146,8 +146,8 @@ const JobIdPage = async ({ params }: { params: Params }) => {
             <h3 className="font-semibold mb-4">Benefits</h3>
             <div className="flex flex-wrap gap-3">
               {benefits
-                .filter((benefit) => jobData.benefits.includes(benefit.id))
-                .map((benefit) => (
+                .filter((benefit: { id: string; label: string; icon: React.ReactNode }) => jobData.benefits.includes(benefit.id))
+                .map((benefit: { id: string; label: string; icon: React.ReactNode }) => (
                   <Badge
                     key={benefit.id}
                     variant="default"
