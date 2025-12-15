@@ -4,7 +4,7 @@ import { jobListingDurationPricing } from "@/app/utils/pricingTiers";
 import { Card } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { ControllerRenderProps } from "react-hook-form";
+import type { ControllerRenderProps, FieldValues, FieldPath } from "react-hook-form";
 import { FormControl } from "../ui/form";
 
 type PricingTier = {
@@ -13,13 +13,13 @@ type PricingTier = {
   description: string;
 };
 
-type JobListingDurationSelectorProps = {
-  field: ControllerRenderProps<Record<string, unknown>, "listingDuration">;
+type JobListingDurationSelectorProps<TFieldValues extends FieldValues = FieldValues, TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>> = {
+  field: ControllerRenderProps<TFieldValues, TName>;
 };
 
-export function JobListingDurationSelector({
+export function JobListingDurationSelector<TFieldValues extends FieldValues = FieldValues, TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>>({
   field,
-}: JobListingDurationSelectorProps) {
+}: JobListingDurationSelectorProps<TFieldValues, TName>) {
   return (
     <FormControl>
       <RadioGroup

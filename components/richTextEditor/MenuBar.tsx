@@ -46,12 +46,10 @@ export function MenuBar({ editor }: MenuBarProps) {
     }
 
     if (url === "") {
-      // @ts-expect-error - TipTap Link extension command
       editor.chain().focus().extendMarkRange("link").unsetLink().run();
       return;
     }
 
-    // @ts-expect-error - TipTap Link extension command
     editor.chain().focus().extendMarkRange("link").setLink({ href: url }).run();
   };
 
@@ -244,7 +242,6 @@ export function MenuBar({ editor }: MenuBarProps) {
                 size="sm"
                 pressed={editor.isActive({ textAlign: "left" })}
                 onPressedChange={() => {
-                  // @ts-expect-error - TipTap TextAlign extension command
                   editor.chain().focus().setTextAlign("left").run();
                 }}
                 className={cn(
@@ -264,7 +261,6 @@ export function MenuBar({ editor }: MenuBarProps) {
                 size="sm"
                 pressed={editor.isActive({ textAlign: "center" })}
                 onPressedChange={() => {
-                  // @ts-expect-error - TipTap TextAlign extension command
                   editor.chain().focus().setTextAlign("center").run();
                 }}
                 className={cn(
@@ -284,7 +280,6 @@ export function MenuBar({ editor }: MenuBarProps) {
                 size="sm"
                 pressed={editor.isActive({ textAlign: "right" })}
                 onPressedChange={() => {
-                  // @ts-expect-error - TipTap TextAlign extension command
                   editor.chain().focus().setTextAlign("right").run();
                 }}
                 className={cn(

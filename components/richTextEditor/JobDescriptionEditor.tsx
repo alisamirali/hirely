@@ -2,19 +2,17 @@
 
 import { EditorContent, useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
-// @ts-expect-error - TipTap extension types
 import LinkExtension from "@tiptap/extension-link";
-// @ts-expect-error - TipTap extension types
 import TextAlignExtension from "@tiptap/extension-text-align";
 import { useEffect } from "react";
-import type { ControllerRenderProps } from "react-hook-form";
+import type { ControllerRenderProps, FieldValues, FieldPath } from "react-hook-form";
 import { MenuBar } from "./MenuBar";
 
-type JobDescriptionEditorProps = {
-  field: ControllerRenderProps<Record<string, unknown>, string>;
+type JobDescriptionEditorProps<TFieldValues extends FieldValues = FieldValues, TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>> = {
+  field: ControllerRenderProps<TFieldValues, TName>;
 };
 
-export function JobDescriptionEditor({ field }: JobDescriptionEditorProps) {
+export function JobDescriptionEditor<TFieldValues extends FieldValues = FieldValues, TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>>({ field }: JobDescriptionEditorProps<TFieldValues, TName>) {
   const editor = useEditor({
     extensions: [
       StarterKit,
