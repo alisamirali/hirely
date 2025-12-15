@@ -46,12 +46,12 @@ export function MenuBar({ editor }: MenuBarProps) {
     }
 
     if (url === "") {
-      // @ts-ignore - TipTap Link extension command
+      // @ts-expect-error - TipTap Link extension command
       editor.chain().focus().extendMarkRange("link").unsetLink().run();
       return;
     }
 
-    // @ts-ignore - TipTap Link extension command
+    // @ts-expect-error - TipTap Link extension command
     editor.chain().focus().extendMarkRange("link").setLink({ href: url }).run();
   };
 
@@ -244,7 +244,7 @@ export function MenuBar({ editor }: MenuBarProps) {
                 size="sm"
                 pressed={editor.isActive({ textAlign: "left" })}
                 onPressedChange={() => {
-                  // @ts-ignore - TipTap TextAlign extension command
+                  // @ts-expect-error - TipTap TextAlign extension command
                   editor.chain().focus().setTextAlign("left").run();
                 }}
                 className={cn(
@@ -264,7 +264,7 @@ export function MenuBar({ editor }: MenuBarProps) {
                 size="sm"
                 pressed={editor.isActive({ textAlign: "center" })}
                 onPressedChange={() => {
-                  // @ts-ignore - TipTap TextAlign extension command
+                  // @ts-expect-error - TipTap TextAlign extension command
                   editor.chain().focus().setTextAlign("center").run();
                 }}
                 className={cn(
@@ -284,7 +284,7 @@ export function MenuBar({ editor }: MenuBarProps) {
                 size="sm"
                 pressed={editor.isActive({ textAlign: "right" })}
                 onPressedChange={() => {
-                  // @ts-ignore - TipTap TextAlign extension command
+                  // @ts-expect-error - TipTap TextAlign extension command
                   editor.chain().focus().setTextAlign("right").run();
                 }}
                 className={cn(
