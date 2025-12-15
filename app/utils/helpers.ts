@@ -1,4 +1,4 @@
-import "server-only";
+// import "server-only";
 
 import { auth } from "@/app/utils/auth";
 import { redirect } from "next/navigation";
@@ -43,4 +43,26 @@ export async function checkIfOnboardingCompleted(userId: string) {
   if (user?.onboardingCompleted === true) {
     redirect("/");
   }
+}
+
+export async function getCompany(userId: string) {
+  const data = await prisma.company.findUnique({
+    where: {
+      userId: userId,
+    },
+    select: {
+      name: true,
+      location: true,
+      about: true,
+      logo: true,
+      linkedInAccount: true,
+      website: true,
+    },
+  });
+
+  if (!data) {
+    return redirect("/");
+  }
+
+  return data;
 }
