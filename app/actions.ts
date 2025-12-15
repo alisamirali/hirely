@@ -1,5 +1,6 @@
 "use server";
 
+import { inngest } from "@/app/utils/inngest/client";
 import { jobListingDurationPricing } from "@/app/utils/pricingTiers";
 import { stripe } from "@/app/utils/stripe";
 import { request } from "@arcjet/next";
@@ -138,7 +139,14 @@ export async function createJob(data: z.infer<typeof jobSchema>) {
     },
   });
 
-  // TODO: Trigger the job expiration function
+  // Trigger the job expiration function
+  await inngest.send({
+    name: "job/created",
+    data: {
+      jobId: jobPost.id,
+      expirationDays: validatedData.listingDuration,
+    },
+  });
 
   // Get price from pricing tiers based on duration
   const pricingTier = jobListingDurationPricing.find(
