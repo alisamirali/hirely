@@ -140,7 +140,7 @@ export function CompanyForm() {
               <FormLabel>LinkedIn Account</FormLabel>
               <FormControl>
                 <Input
-                  placeholder="https://www.linkedin.com/company/yourcompany"
+                  placeholder="https://www.linkedin.com/company/your-company"
                   {...field}
                 />
               </FormControl>
