@@ -25,31 +25,75 @@ export async function POST(req: Request) {
   const session = event.data.object as Stripe.Checkout.Session;
 
   if (event.type === "checkout.session.completed") {
-    const customerId = session.customer as string;
-    const jobId = session.metadata?.jobId;
+    try {
+      const customerId = session.customer as string;
+      const jobId = session.metadata?.jobId;
 
-    if (!jobId) {
-      return new Response("No job ID found", { status: 400 });
+      if (!jobId) {
+        return new Response("No job ID found", { status: 400 });
+      }
+
+      const user = await prisma.user.findUnique({
+        where: {
+          stripeCustomerId: customerId,
+        },
+      });
+
+      if (!user) {
+        return new Response("User not found", { status: 404 });
+      }
+
+      // Find the company associated with the user
+      const company = await prisma.company.findUnique({
+        where: {
+          userId: user.id,
+        },
+        select: {
+          id: true,
+        },
+      });
+
+      if (!company) {
+        return new Response("Company not found", { status: 404 });
+      }
+
+      // Update the job post status to ACTIVE
+      // Verify the job belongs to the user's company before updating
+      const jobPost = await prisma.jobPost.findUnique({
+        where: {
+          id: jobId,
+        },
+        select: {
+          companyId: true,
+        },
+      });
+
+      if (!jobPost) {
+        return new Response("Job not found", { status: 404 });
+      }
+
+      if (jobPost.companyId !== company.id) {
+        return new Response("Job does not belong to user's company", {
+          status: 403,
+        });
+      }
+
+      await prisma.jobPost.update({
+        where: {
+          id: jobId,
+        },
+        data: {
+          status: "ACTIVE",
+        },
+      });
+    } catch (error) {
+      return new Response(
+        `Webhook processing failed: ${
+          error instanceof Error ? error.message : "Unknown error"
+        }`,
+        { status: 500 }
+      );
     }
-
-    const user = await prisma.user.findUnique({
-      where: {
-        stripeCustomerId: customerId,
-      },
-    });
-
-    if (!user) throw new Error("User not found...");
-
-    // Update the job post status to PUBLISHED
-    await prisma.jobPost.update({
-      where: {
-        id: jobId,
-        userId: user.id, // Ensure the job belongs to the user
-      },
-      data: {
-        status: "ACTIVE",
-      },
-    });
   }
 
   return new Response(null, { status: 200 });

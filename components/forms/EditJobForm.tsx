@@ -1,5 +1,6 @@
 "use client";
 
+import { updateJobPost } from "@/app/actions";
 import { countryList } from "@/app/utils/countriesList";
 import { jobSchema } from "@/app/utils/zodSchemas";
 import { JobDescriptionEditor } from "@/components/richTextEditor/JobDescriptionEditor";
@@ -84,8 +85,7 @@ export function EditJobForm({ jobPost }: EditJobFormProps) {
     try {
       setPending(true);
 
-      //   await updateJobPost(values, jobPost.id);
-      console.log(values);
+      await updateJobPost(values, jobPost.id);
     } catch (error) {
       if (error instanceof Error && error.message !== "NEXT_REDIRECT") {
         toast.error("Something went wrong. Please try again.");
@@ -276,16 +276,14 @@ export function EditJobForm({ jobPost }: EditJobFormProps) {
                         <SelectGroup>
                           <SelectLabel>Worldwide</SelectLabel>
                           <SelectItem value="worldwide">
-                            <span>🌍</span>
-                            <span className="pl-2">Worldwide</span>
+                            <span>Worldwide</span>
                           </SelectItem>
                         </SelectGroup>
                         <SelectGroup>
                           <SelectLabel>Location</SelectLabel>
                           {countryList.map((country) => (
                             <SelectItem value={country.name} key={country.name}>
-                              <span>{country.flagEmoji}</span>
-                              <span className="pl-2">{country.name}</span>
+                              <span>{country.name}</span>
                             </SelectItem>
                           ))}
                         </SelectGroup>
@@ -306,9 +304,6 @@ export function EditJobForm({ jobPost }: EditJobFormProps) {
                     <FormLabel>Company Website</FormLabel>
                     <FormControl>
                       <div className="flex ">
-                        <span className="flex items-center justify-center px-3 border border-r-0 border-input rounded-l-md bg-muted text-muted-foreground text-sm">
-                          https://
-                        </span>
                         <Input
                           {...field}
                           placeholder="Company Website"
@@ -329,9 +324,6 @@ export function EditJobForm({ jobPost }: EditJobFormProps) {
                     <FormLabel>Company LinkedIn Account</FormLabel>
                     <FormControl>
                       <div className="flex ">
-                        <span className="flex items-center justify-center px-3 border border-r-0 border-input rounded-l-md bg-muted text-muted-foreground text-sm">
-                          https://
-                        </span>
                         <Input
                           {...field}
                           placeholder="linkedin.com/company/your-company"
@@ -413,7 +405,7 @@ export function EditJobForm({ jobPost }: EditJobFormProps) {
         </Card>
 
         <Button type="submit" className="w-full" disabled={pending}>
-          {pending ? "Submitting..." : "Continue"}
+          {pending ? "Submitting..." : "Save Changes"}
         </Button>
       </form>
     </Form>

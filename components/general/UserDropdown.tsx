@@ -68,7 +68,7 @@ export function UserDropdown({ email, name, image }: UserDropdownProps) {
                 className="opacity-60"
                 aria-hidden="true"
               />
-              <span>My Job Listings</span>
+              <span>My Jobs</span>
             </Link>
           </DropdownMenuItem>
         </DropdownMenuGroup>
