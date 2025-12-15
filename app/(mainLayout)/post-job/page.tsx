@@ -38,37 +38,48 @@ export default async function PostJobPage() {
           <CardContent className="space-y-6">
             {/* Company Logos */}
             <div className="grid grid-cols-3 gap-4">
-              {companies.map((company: { id: number; name: string; logo: unknown }) => (
-                <div
-                  key={company.id}
-                  className="flex items-center justify-center"
-                >
-                  <Image
-                    src={company.logo}
-                    alt={company.name}
-                    height={60}
-                    width={60}
-                    className="opacity-75 w-20 transition-opacity hover:opacity-100 rounded-lg"
-                  />
-                </div>
-              ))}
+              {companies.map(
+                (company: { id: number; name: string; logo: unknown }) => (
+                  <div
+                    key={company.id}
+                    className="flex items-center justify-center"
+                  >
+                    <Image
+                      src={company.logo as string}
+                      alt={company.name}
+                      height={60}
+                      width={60}
+                      className="opacity-75 w-20 transition-opacity hover:opacity-100 rounded-lg"
+                    />
+                  </div>
+                )
+              )}
             </div>
 
             {/* Testimonials */}
             <div className="space-y-4">
-              {testimonials.map((testimonial: { quote: string; author: string; company: string }, index) => (
-                <blockquote
-                  key={index}
-                  className="border-l-2 border-primary pl-4"
-                >
-                  <p className="text-sm italic text-muted-foreground">
-                    &quot;{testimonial.quote}&quot;
-                  </p>
-                  <footer className="mt-2 text-sm font-medium">
-                    - {testimonial.author}, {testimonial.company}
-                  </footer>
-                </blockquote>
-              ))}
+              {testimonials.map(
+                (
+                  testimonial: {
+                    quote: string;
+                    author: string;
+                    company: string;
+                  },
+                  index
+                ) => (
+                  <blockquote
+                    key={index}
+                    className="border-l-2 border-primary pl-4"
+                  >
+                    <p className="text-sm italic text-muted-foreground">
+                      &quot;{testimonial.quote}&quot;
+                    </p>
+                    <footer className="mt-2 text-sm font-medium">
+                      - {testimonial.author}, {testimonial.company}
+                    </footer>
+                  </blockquote>
+                )
+              )}
             </div>
 
             {/* Stats */}
