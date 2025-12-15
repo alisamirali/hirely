@@ -269,10 +269,14 @@ const JobIdPage = async ({ params }: { params: Params }) => {
                   </p>
                 </div>
               </div>
-              {/* TODO: Add company profile */}
-              {/*  <Button variant="outline" className="w-full">
-                View company profile
-              </Button> */}
+
+              <Button variant="outline" className="w-full" asChild>
+                <Link
+                  href={`/company/${encodeURIComponent(jobData.company.name)}`}
+                >
+                  View Company Profile
+                </Link>
+              </Button>
             </div>
           </Card>
         </div>
