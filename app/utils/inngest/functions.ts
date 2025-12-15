@@ -7,7 +7,7 @@ const resend = new Resend(process.env.RESEND_API_KEY!);
 export const handleJobExpiration = inngest.createFunction(
   { id: "job-expiration" },
   { event: "job/created" },
-  async ({ event, step }: { event: any; step: any }) => {
+  async ({ event, step }: { event: { data: { jobId: string; expirationDays: number } }; step: { sleep: (id: string, duration: string) => Promise<void>; run: <T>(id: string, fn: () => Promise<T>) => Promise<T> } }) => {
     const { jobId, expirationDays } = event.data;
 
     // Wait for the specified duration
@@ -25,11 +25,21 @@ export const handleJobExpiration = inngest.createFunction(
   }
 );
 
+type JobPostWithCompany = {
+  jobTitle: string;
+  location: string;
+  salaryFrom: number;
+  salaryTo: number;
+  company: {
+    name: string;
+  };
+};
+
 export const sendPeriodicJobListings = inngest.createFunction(
   { id: "send-job-listings" },
   { event: "jobseeker/created" },
-  async ({ event, step }: { event: any; step: any }) => {
-    const { userId, _email } = event.data;
+  async ({ event, step }: { event: { data: { userId: string } }; step: { sleep: (id: string, duration: string) => Promise<void>; run: <T>(id: string, fn: () => Promise<T>) => Promise<T> } }) => {
+    const { userId } = event.data;
 
     const totalDays = 30;
     const intervalDays = 2;
@@ -62,7 +72,7 @@ export const sendPeriodicJobListings = inngest.createFunction(
         await step.run("send-email", async () => {
           const jobListingsHtml = recentJobs
             .map(
-              (job: any) => `
+              (job: JobPostWithCompany) => `
                 <div style="margin-bottom: 20px; padding: 15px; border: 1px solid #eee; border-radius: 5px;">
                   <h3 style="margin: 0;">${job.jobTitle}</h3>
                   <p style="margin: 5px 0;">

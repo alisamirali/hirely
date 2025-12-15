@@ -196,7 +196,7 @@ export function CompanyForm() {
                   ) : (
                     <UploadDropzone
                       endpoint="imageUploader"
-                      onClientUploadComplete={(res) => {
+                      onClientUploadComplete={(res: Array<{ url: string }>) => {
                         field.onChange(res[0].url);
                         toast.success("Logo uploaded successfully!");
                       }}

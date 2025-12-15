@@ -7,8 +7,14 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { ControllerRenderProps } from "react-hook-form";
 import { FormControl } from "../ui/form";
 
+type PricingTier = {
+  days: number;
+  price: number;
+  description: string;
+};
+
 type JobListingDurationSelectorProps = {
-  field: ControllerRenderProps<any, "listingDuration">;
+  field: ControllerRenderProps<Record<string, unknown>, "listingDuration">;
 };
 
 export function JobListingDurationSelector({
@@ -21,7 +27,7 @@ export function JobListingDurationSelector({
         onValueChange={(value) => field.onChange(parseInt(value))}
       >
         <div className="grid gap-4">
-          {jobListingDurationPricing.map((duration: any) => (
+          {jobListingDurationPricing.map((duration: PricingTier) => (
             <div key={duration.days} className="relative">
               <RadioGroupItem
                 value={duration.days.toString()}

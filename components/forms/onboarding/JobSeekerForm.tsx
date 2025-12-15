@@ -112,7 +112,7 @@ export function JobSeekerForm() {
                   ) : (
                     <UploadDropzone
                       endpoint="resumeUploader"
-                      onClientUploadComplete={(res: any) => {
+                      onClientUploadComplete={(res: Array<{ url: string }>) => {
                         field.onChange(res[0].url);
                         toast.success("Resume uploaded successfully!");
                       }}
