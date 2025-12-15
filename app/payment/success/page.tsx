@@ -1,9 +1,26 @@
+import { activateJobAfterPayment } from "@/app/actions";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Check } from "lucide-react";
 import Link from "next/link";
 
-export default function PaymentSuccess() {
+type SearchParamsProps = {
+  searchParams: Promise<{
+    session_id?: string;
+  }>;
+};
+
+export default async function PaymentSuccess({
+  searchParams,
+}: SearchParamsProps) {
+  const params = await searchParams;
+  const sessionId = params.session_id;
+
+  // Activate the job if session_id is provided (fallback if webhook didn't fire)
+  if (sessionId) {
+    await activateJobAfterPayment(sessionId);
+  }
+
   return (
     <div className="w-full h-screen flex flex-1 justify-center items-center">
       <Card className="w-[350px]">

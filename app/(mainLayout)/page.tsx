@@ -1,4 +1,5 @@
 import { JobFilters } from "@/components/general/JobFilters";
+import { JobListings } from "@/components/general/JobListings";
 import { JobListingsLoading } from "@/components/general/JobListingsLoading";
 import { Suspense } from "react";
 
@@ -27,7 +28,11 @@ export default async function Home({ searchParams }: SearchParamsProps) {
 
       <div className="col-span-2 flex flex-col gap-6">
         <Suspense key={filterKey} fallback={<JobListingsLoading />}>
-          JobListings
+          <JobListings
+            currentPage={currentPage}
+            jobTypes={jobTypes}
+            location={location}
+          />
         </Suspense>
       </div>
     </section>
