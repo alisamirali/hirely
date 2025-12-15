@@ -4,7 +4,6 @@ import { EmptyState } from "@/components/general/EmptyState";
 import { JobCard } from "@/components/general/JobCard";
 import { Card } from "@/components/ui/card";
 import { request } from "@arcjet/next";
-import { JobPostStatus } from "@prisma/client";
 import { ExternalLink, Globe, Linkedin, MapPin } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -33,7 +32,7 @@ async function getCompany(companyName: string) {
       createdAt: true,
       JobPost: {
         where: {
-          status: JobPostStatus.ACTIVE,
+          status: "ACTIVE",
         },
         select: {
           id: true,
