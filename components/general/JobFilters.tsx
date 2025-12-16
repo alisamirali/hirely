@@ -24,7 +24,12 @@ export function JobFilters() {
   const router = useRouter();
   const searchParams = useSearchParams();
 
-  const jobTypes = ["Full-time", "Part-time", "Contract", "Internship"];
+  const jobTypes = [
+    { value: "full-time", label: "Full Time" },
+    { value: "part-time", label: "Part Time" },
+    { value: "contract", label: "Contract" },
+    { value: "internship", label: "Internship" },
+  ];
 
   // Get current filters from URL
   const currentJobTypes = searchParams.get("jobTypes")?.split(",") || [];
@@ -93,19 +98,19 @@ export function JobFilters() {
           <Label className="text-lg font-semibold">Job Type</Label>
           <div className="grid grid-cols-2 gap-4">
             {jobTypes.map((type) => (
-              <div key={type} className="flex items-center space-x-2">
+              <div key={type.value} className="flex items-center space-x-2">
                 <Checkbox
-                  id={type.toLowerCase()}
-                  checked={currentJobTypes.includes(type)}
+                  id={type.value}
+                  checked={currentJobTypes.includes(type.value)}
                   onCheckedChange={(checked) =>
-                    handleJobTypeChange(type, checked as boolean)
+                    handleJobTypeChange(type.value, checked as boolean)
                   }
                 />
                 <Label
-                  htmlFor={type.toLowerCase()}
+                  htmlFor={type.value}
                   className="text-sm font-medium"
                 >
-                  {type}
+                  {type.label}
                 </Label>
               </div>
             ))}
