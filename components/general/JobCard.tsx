@@ -46,7 +46,7 @@ export function JobCard({ job }: JobCardProps) {
               </div>
             )}
             <div className="flex flex-col flex-grow">
-              <h1 className="text-xl md:text-2xl font-bold mb-1">
+              <h1 className="text-xl md:text-2xl font-bold mb-1.5">
                 {job.jobTitle}
               </h1>
               <div className="flex flex-wrap items-center gap-2">
@@ -73,8 +73,8 @@ export function JobCard({ job }: JobCardProps) {
               </p>
             </div>
 
-            <div className="md:ml-auto flex flex-col gap-1 w-fit">
-              <Badge className="rounded-full capitalize text-sm font-semibold whitespace-nowrap">
+            <div className="md:ml-auto justify-end flex gap-1">
+              <Badge className="rounded-full capitalize w-fit text-sm font-semibold whitespace-nowrap">
                 {job.location}
               </Badge>
             </div>

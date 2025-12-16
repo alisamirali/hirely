@@ -142,7 +142,7 @@ const CompanyProfilePage = async ({ params }: { params: Params }) => {
                         className="flex items-center gap-1.5 hover:text-primary transition-colors"
                       >
                         <Globe className="size-4" />
-                        <span className="hidden md:inline">Website</span>
+                        <span>Website</span>
                         <ExternalLink className="size-3" />
                       </Link>
                     </>
@@ -157,7 +157,7 @@ const CompanyProfilePage = async ({ params }: { params: Params }) => {
                         className="flex items-center gap-1.5 hover:text-primary transition-colors"
                       >
                         <Linkedin className="size-4" />
-                        <span className="hidden md:inline">LinkedIn</span>
+                        <span>LinkedIn</span>
                         <ExternalLink className="size-3" />
                       </Link>
                     </>
@@ -209,23 +209,25 @@ const CompanyProfilePage = async ({ params }: { params: Params }) => {
 
           {activeJobs.length > 0 ? (
             <div className="flex flex-col gap-6">
-              {activeJobs.map((job: {
-                id: string;
-                jobTitle: string;
-                salaryFrom: number;
-                salaryTo: number;
-                employmentType: string;
-                location: string;
-                createdAt: Date;
-                company: {
-                  name: string;
-                  logo: string | null;
+              {activeJobs.map(
+                (job: {
+                  id: string;
+                  jobTitle: string;
+                  salaryFrom: number;
+                  salaryTo: number;
+                  employmentType: string;
                   location: string;
-                  about: string;
-                };
-              }) => (
-                <JobCard job={job} key={job.id} />
-              ))}
+                  createdAt: Date;
+                  company: {
+                    name: string;
+                    logo: string | null;
+                    location: string;
+                    about: string;
+                  };
+                }) => (
+                  <JobCard job={job} key={job.id} />
+                )
+              )}
             </div>
           ) : (
             <EmptyState

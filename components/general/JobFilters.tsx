@@ -78,7 +78,7 @@ export function JobFilters() {
   };
 
   return (
-    <Card className="col-span-1 h-fit">
+    <Card className="w-full md:col-span-1 h-fit">
       <CardHeader className="space-y-4">
         <div className="flex justify-between items-center">
           <CardTitle className="text-xl font-semibold">Filter</CardTitle>
@@ -106,10 +106,7 @@ export function JobFilters() {
                     handleJobTypeChange(type.value, checked as boolean)
                   }
                 />
-                <Label
-                  htmlFor={type.value}
-                  className="text-sm font-medium"
-                >
+                <Label htmlFor={type.value} className="text-sm font-medium">
                   {type.label}
                 </Label>
               </div>

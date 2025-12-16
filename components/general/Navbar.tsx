@@ -71,7 +71,7 @@ export async function Navbar() {
             <SheetContent>
               <SheetHeader className="text-left">
                 <SheetTitle>
-                  Job<span className="text-primary">Marshal</span>
+                  Hirely<span className="text-primary">.</span>
                 </SheetTitle>
                 <SheetDescription>
                   Find or post your next job opportunity
