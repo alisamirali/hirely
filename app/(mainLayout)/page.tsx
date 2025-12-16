@@ -23,7 +23,7 @@ export default async function Home({ searchParams }: SearchParamsProps) {
   )};location=${location}`;
 
   return (
-    <section className="grid grid-cols-1 md:grid-cols-3">
+    <section className="grid grid-cols-1 md:gap-8 md:grid-cols-3">
       <JobFilters />
 
       <div className="col-span-2 flex flex-col gap-6 mt-8 md:mt-0">

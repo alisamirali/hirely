@@ -74,7 +74,7 @@ export function JobCard({ job }: JobCardProps) {
             </div>
 
             <div className="md:ml-auto justify-end flex gap-1">
-              <Badge className="rounded-full capitalize w-fit text-sm font-semibold whitespace-nowrap">
+              <Badge className="rounded-full capitalize h-fit text-sm font-semibold whitespace-nowrap">
                 {job.location}
               </Badge>
             </div>
