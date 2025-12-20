@@ -32,4 +32,7 @@ export const jobSchema = z.object({
   companyLinkedInAccount: z.string().optional(),
   companyDescription: z.string().min(1, "Company description is required"),
   listingDuration: z.number().min(1, "Listing duration is required"),
+  jobLink: z
+    .union([z.string().url("Please enter a valid URL"), z.literal("")])
+    .optional(),
 });

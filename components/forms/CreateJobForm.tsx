@@ -72,6 +72,7 @@ export function CreateJobForm({
       salaryTo: 0,
       companyLogo: companyLogo,
       listingDuration: 30,
+      jobLink: "",
     },
   });
 
@@ -226,6 +227,28 @@ export function CreateJobForm({
                 </FormItem>
               )}
             />
+
+            <FormField
+              control={form.control}
+              name="jobLink"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Application Link (Optional)</FormLabel>
+                  <FormControl>
+                    <Input
+                      {...field}
+                      placeholder="https://example.com/apply"
+                      type="url"
+                    />
+                  </FormControl>
+                  <FormMessage />
+                  <p className="text-sm text-muted-foreground">
+                    Add a link where applicants can apply for this job. If not
+                    provided, the apply button will be disabled.
+                  </p>
+                </FormItem>
+              )}
+            />
           </CardContent>
         </Card>
 
@@ -345,7 +368,7 @@ export function CreateJobForm({
                 <FormItem>
                   <FormLabel>Company Logo</FormLabel>
                   <FormControl>
-                    <>
+                    <div>
                       {field.value ? (
                         <div className="relative w-fit">
                           <Image
@@ -378,7 +401,7 @@ export function CreateJobForm({
                           }}
                         />
                       )}
-                    </>
+                    </div>
                   </FormControl>
                   <FormMessage />
                 </FormItem>

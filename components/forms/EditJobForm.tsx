@@ -48,6 +48,7 @@ type EditJobFormProps = {
     jobDescription: string;
     benefits: string[];
     listingDuration: number;
+    jobLink: string | null;
     company: {
       location: string;
       name: string;
@@ -77,6 +78,7 @@ export function EditJobForm({ jobPost }: EditJobFormProps) {
       salaryTo: jobPost.salaryTo,
       companyLogo: jobPost.company.logo,
       listingDuration: jobPost.listingDuration,
+      jobLink: jobPost.jobLink || "",
     },
   });
 
@@ -234,6 +236,28 @@ export function EditJobForm({ jobPost }: EditJobFormProps) {
                 </FormItem>
               )}
             />
+
+            <FormField
+              control={form.control}
+              name="jobLink"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Application Link (Optional)</FormLabel>
+                  <FormControl>
+                    <Input
+                      {...field}
+                      placeholder="https://example.com/apply"
+                      type="url"
+                    />
+                  </FormControl>
+                  <FormMessage />
+                  <p className="text-sm text-muted-foreground">
+                    Add a link where applicants can apply for this job. If not
+                    provided, the apply button will be disabled.
+                  </p>
+                </FormItem>
+              )}
+            />
           </CardContent>
         </Card>
 
@@ -362,7 +386,7 @@ export function EditJobForm({ jobPost }: EditJobFormProps) {
                 <FormItem>
                   <FormLabel>Company Logo</FormLabel>
                   <FormControl>
-                    <>
+                    <div>
                       {field.value ? (
                         <div className="relative w-fit">
                           <Image
@@ -395,7 +419,7 @@ export function EditJobForm({ jobPost }: EditJobFormProps) {
                           }}
                         />
                       )}
-                    </>
+                    </div>
                   </FormControl>
                   <FormMessage />
                 </FormItem>

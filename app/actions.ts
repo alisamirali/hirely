@@ -137,6 +137,7 @@ export async function createJob(data: z.infer<typeof jobSchema>) {
       salaryTo: validatedData.salaryTo,
       listingDuration: validatedData.listingDuration,
       benefits: validatedData.benefits,
+      jobLink: validatedData.jobLink || null,
     },
   });
 
@@ -209,6 +210,7 @@ export async function updateJobPost(
       salaryTo: validatedData.salaryTo,
       listingDuration: validatedData.listingDuration,
       benefits: validatedData.benefits,
+      jobLink: validatedData.jobLink || null,
     },
   });
 
