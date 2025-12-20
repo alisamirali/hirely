@@ -42,6 +42,7 @@ async function getJob(jobId: string, userId?: string) {
 
         createdAt: true,
         listingDuration: true,
+        jobLink: true,
         company: {
           select: {
             name: true,
@@ -146,19 +147,31 @@ const JobIdPage = async ({ params }: { params: Params }) => {
             <h3 className="font-semibold mb-4">Benefits</h3>
             <div className="flex flex-wrap gap-3">
               {benefits
-                .filter((benefit: { id: string; label: string; icon: React.ReactNode }) => jobData.benefits.includes(benefit.id))
-                .map((benefit: { id: string; label: string; icon: React.ReactNode }) => (
-                  <Badge
-                    key={benefit.id}
-                    variant="default"
-                    className="text-sm px-4 py-1.5 rounded-full"
-                  >
-                    <span className="flex items-center gap-2">
-                      {benefit.icon}
-                      {benefit.label}
-                    </span>
-                  </Badge>
-                ))}
+                .filter(
+                  (benefit: {
+                    id: string;
+                    label: string;
+                    icon: React.ReactNode;
+                  }) => jobData.benefits.includes(benefit.id)
+                )
+                .map(
+                  (benefit: {
+                    id: string;
+                    label: string;
+                    icon: React.ReactNode;
+                  }) => (
+                    <Badge
+                      key={benefit.id}
+                      variant="default"
+                      className="text-sm px-4 py-1.5 rounded-full"
+                    >
+                      <span className="flex items-center gap-2">
+                        {benefit.icon}
+                        {benefit.label}
+                      </span>
+                    </Badge>
+                  )
+                )}
             </div>
           </section>
         </div>
@@ -182,13 +195,21 @@ const JobIdPage = async ({ params }: { params: Params }) => {
                   This helps us grow!
                 </p>
               </div>
-              <form>
-                <input type="hidden" name="jobId" value={jobId} />
-                {/* <GeneralSubmitButton text="Apply now" /> */}
+              {jobData.jobLink ? (
+                <Button asChild className="w-full">
+                  <Link
+                    href={jobData.jobLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Apply now
+                  </Link>
+                </Button>
+              ) : (
                 <p className="text-sm border border-muted-foreground/30 cursor-not-allowed rounded-md p-2 text-center w-full text-muted-foreground">
-                  COMING SOON
+                  Application link not available
                 </p>
-              </form>
+              )}
             </div>
           </Card>
 

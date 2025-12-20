@@ -130,6 +130,7 @@ model JobPost {
     jobDescription  String
     listingDuration Int
     benefits        String[]
+    jobLink         String?
 
     status       JobPostStatus @default(DRAFT)
     applications Int           @default(0)
